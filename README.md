@@ -12,6 +12,9 @@ sudo dnf install @development-tools
 sudo apt install build-essential
 ```
 
+### Brew/macOS Notes
+This should work on macOS using Brew, IDK.
+
 ## Building
 Download this repo by opening your terminal and running the following command.
 ```
