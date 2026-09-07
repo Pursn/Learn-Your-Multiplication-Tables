@@ -103,7 +103,7 @@ void select_table_to_practice(){
   int max_number = pow(max_table_length, 2);
 
   //This gets the length of characters an integer has.
-  char chosen_number_buffer[(int)log10(max_table_length) + 2];
+  char chosen_number_buffer[(int)log10(max_table_length) + 1];
   int chosen_number;
 
   bool loop;
@@ -112,6 +112,7 @@ void select_table_to_practice(){
 
     //Gets user input
     fgets(chosen_number_buffer, sizeof(chosen_number_buffer), stdin);
+
     chosen_number = strtol(chosen_number_buffer, NULL, 10);
 
     if(!(chosen_number >= 1 && chosen_number <= max_table_length)){
@@ -153,6 +154,8 @@ void select_table_to_practice(){
   clear_input_buffer();
 
   for(int index = 0; index < max_table_length; index++){
+    clear_screen();
+
     printf("Correct: %d/%d\n", count_of_correct, max_table_length);
     printf("%d.)  %d X %d = ", (index + 1), chosen_number, array[index]);
     
@@ -163,6 +166,7 @@ void select_table_to_practice(){
     if(answer == (chosen_number * array[index])){
       count_of_correct++;
     }
+
     clear_screen();
   }
 
