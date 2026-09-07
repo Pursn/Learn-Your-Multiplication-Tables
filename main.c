@@ -12,6 +12,8 @@
 #include <math.h>
 #include <time.h>
 
+char conf_file_path[1024];
+#define CONF_FILE ".lymt_conf"
 #define MAX_TABLE_LENGTH 20
 
 FILE *file_ptr;
@@ -26,7 +28,7 @@ void clear_input_buffer(){
 }
 
 bool file_exists(){
-  file_ptr = fopen("lymt.conf", "r");
+  file_ptr = fopen(conf_file_path, "r");
 
   if(file_ptr == NULL)  return false;
   return true;
@@ -35,7 +37,7 @@ bool file_exists(){
 void file_check(){
   //If our .conf file doesn't exist, we make it exist.
   if(!file_exists()){
-    file_ptr = fopen("lymt.conf", "w");
+    file_ptr = fopen(conf_file_path, "w");
     fprintf(file_ptr, "%d", MAX_TABLE_LENGTH);
   }
 }//end of file_check function
@@ -46,6 +48,10 @@ void modify_learning_settings();
 
 int main(){
   clear_screen();
+
+  char *home = getenv("HOME");
+  snprintf(conf_file_path, sizeof(conf_file_path), "%s/%s", home, CONF_FILE);
+
   file_check();
   
   char option[2];//This includes the null character at the end
@@ -91,7 +97,7 @@ int main(){
 
 void select_table_to_practice(){
   //Read data from .conf file
-  file_ptr = fopen("lymt.conf", "r");
+  file_ptr = fopen(conf_file_path, "r");
 
   char max_table_length_buffer[5];
   fgets(max_table_length_buffer, sizeof(max_table_length_buffer), file_ptr);
@@ -181,7 +187,7 @@ void modify_learning_settings(){
   fgets(buffer, sizeof(buffer), stdin);
 
   int response = strtol(buffer, NULL, 10);
-  file_ptr = fopen("lymt.conf", "w");
+  file_ptr = fopen(conf_file_path, "w");
 
   if(response < 10){
     fprintf(file_ptr, "10");
