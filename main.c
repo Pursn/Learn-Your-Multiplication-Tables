@@ -96,30 +96,28 @@ int main(){
 
 
 void select_table_to_practice(){
-  //Read data from .conf file
+  //Read data from conf file
   file_ptr = fopen(conf_file_path, "r");
 
-  char max_table_length_buffer[4];
+  char max_table_length_buffer[5];
   fgets(max_table_length_buffer, sizeof(max_table_length_buffer), file_ptr);
 
   int max_table_length = strtol(max_table_length_buffer, NULL, 10);
-  
 
   //This gets the length of characters an integer has.
-  char chosen_number_buffer[(int)ceil(log10(max_table_length)) + 1];
-  int chosen_number;
+  char chosen_number_buffer[(int)log10(max_table_length) + 1];
+  int chosen_number = -1;
 
-  bool loop;
+  bool loop = true;
   do{
-    loop = false;
 
     //Gets user input
     fgets(chosen_number_buffer, sizeof(chosen_number_buffer), stdin);
 
     chosen_number = strtol(chosen_number_buffer, NULL, 10);
 
-    if(!(chosen_number >= 1 && chosen_number <= max_table_length)){
-      loop = true;
+    if(chosen_number > 0 && chosen_number <= max_table_length){
+      loop = false;
     }
   }//end of do
   while(loop);
@@ -196,3 +194,4 @@ void modify_learning_settings(){
     fprintf(file_ptr, buffer);
   }
 }//end of modify_learning_settings function
+
