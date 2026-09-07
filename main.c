@@ -99,17 +99,14 @@ void select_table_to_practice(){
   //Read data from .conf file
   file_ptr = fopen(conf_file_path, "r");
 
-  char max_table_length_buffer[5];
+  char max_table_length_buffer[4];
   fgets(max_table_length_buffer, sizeof(max_table_length_buffer), file_ptr);
 
   int max_table_length = strtol(max_table_length_buffer, NULL, 10);
   
-  //Turn data from .conf file from string to integer
-  //Multiply it by itself to get the highest value in the multiplication table
-  int max_number = pow(max_table_length, 2);
 
   //This gets the length of characters an integer has.
-  char chosen_number_buffer[(int)log10(max_table_length) + 1];
+  char chosen_number_buffer[(int)ceil(log10(max_table_length)) + 1];
   int chosen_number;
 
   bool loop;
@@ -199,4 +196,3 @@ void modify_learning_settings(){
     fprintf(file_ptr, buffer);
   }
 }//end of modify_learning_settings function
-
