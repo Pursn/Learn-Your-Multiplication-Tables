@@ -28,11 +28,11 @@ Building this project is super easy since every command needed will be in the Ma
 
 In the repo's directory, build the project by typing:
 ```
-make project
+make install
 ```
 To run it, you can type:
 ```
-make run
+lymt
 ```
 To remove the executable if you don't want it anymore or if you are recompiling, use this:
 ```
