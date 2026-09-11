@@ -14,7 +14,7 @@
 
 char conf_file_path[1024];
 #define CONF_FILE ".lymt_conf"
-#define MAX_TABLE_LENGTH 20
+#define MAX_TABLE_LENGTH "20"
 
 FILE *file_ptr;
 
@@ -36,9 +36,10 @@ bool file_exists(){
 
 void file_check(){
   //If our .conf file doesn't exist, we make it exist.
-  if(!file_exists()){
+  if(!(file_exists())){
     file_ptr = fopen(conf_file_path, "w");
-    fprintf(file_ptr, "%d", MAX_TABLE_LENGTH);
+    fprintf(file_ptr, MAX_TABLE_LENGTH);
+    fflush(file_ptr);
   }
 }//end of file_check function
 
